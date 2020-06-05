@@ -94,7 +94,7 @@ public class PhobicCoatingHandler {
 
             if (blockUnder == Blocks.lava || blockUnder == Blocks.flowing_lava) {
                 isWalkingInLava = true;
-                if (Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed()) {
+                if (isJumping) {
                     entity.motionY = 0.5D;
                 } else {
                     entity.motionY = 0;

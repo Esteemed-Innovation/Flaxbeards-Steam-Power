@@ -77,6 +77,17 @@ public class SteamcraftTickHandler {
                 ticksSinceLastCellFill = -40;
             }
         }
+		
+		if (chest != null && chest.getItem() instanceof ItemExosuitArmor) {
+                ItemExosuitArmor item = (ItemExosuitArmor) chest.getItem();
+                if (item.hasUpgrade(chest, SteamcraftItems.jetpack) &&
+                  SteamcraftEventHandler.hasPower(player, 5)) {
+                    if (!player.onGround && !player.capabilities.isFlying) {
+                        player.fallDistance = 0.0F;
+					}
+				}
+		}
+		
         if (isJumping) {
             if (boots != null && boots.getItem() instanceof ItemExosuitArmor) {
                 ItemExosuitArmor item = (ItemExosuitArmor) boots.getItem();
@@ -111,7 +122,6 @@ public class SteamcraftTickHandler {
                   SteamcraftEventHandler.hasPower(player, 5)) {
                     if (!player.onGround && !player.capabilities.isFlying) {
                         player.motionY += 0.06D;
-                        player.fallDistance = 0.0F;
                         if (!isServer) {
                             double rotation = Math.toRadians(player.renderYawOffset);
                             world.spawnParticle("smoke",
